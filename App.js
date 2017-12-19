@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import codePush from 'react-native-code-push';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -19,12 +21,12 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component<{}> {
+class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome to React Native! This is wrapped by CodePush
         </Text>
         <Text style={styles.instructions}>
           To get started, edit App.js
@@ -36,6 +38,8 @@ export default class App extends Component<{}> {
     );
   }
 }
+
+App = codePush(App);
 
 const styles = StyleSheet.create({
   container: {
@@ -55,3 +59,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default App
