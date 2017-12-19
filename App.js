@@ -9,7 +9,9 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
+  Linking
 } from 'react-native';
 
 import codePush from 'react-native-code-push';
@@ -22,18 +24,33 @@ const instructions = Platform.select({
 });
 
 class App extends Component<{}> {
+  openExternalMap() {
+    const scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:'
+    const url = scheme + '1.3113786,103.856568'
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log('Don\'t know how to open URI: ' + url);
+      }
+    });
+  }
+
+  openInternalMap() {
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native! This is wrapped by CodePush
+          Welcome to React Native! This is wrapped by CodePushv3
         </Text>
         <Text style={styles.instructions}>
           To get started, edit App.js
         </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Button onPress={this.openExternalMap} title="Open External Map" />
+        <Button onPress={this.openInternalMap} title="Open Internal Map" />
       </View>
     );
   }
