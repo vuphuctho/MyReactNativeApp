@@ -26,7 +26,7 @@ const instructions = Platform.select({
 class App extends Component<{}> {
   openExternalMap() {
     const scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:'
-    const url = scheme + '1.3113786,103.856568'
+    const url = scheme + '1.3113786,103.856568?q=1.3113786,103.856568&z=17'
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
